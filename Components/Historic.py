@@ -9,7 +9,6 @@ class Historic(QLabel):
         self.configStyle()
         self.historic = self.getHistoric()
 
-
     def configStyle(self):
         self.setStyleSheet(f'font-size: {MEDIUM_FONT_SIZE}px')
         self.setAlignment(Qt.AlignmentFlag.AlignRight)

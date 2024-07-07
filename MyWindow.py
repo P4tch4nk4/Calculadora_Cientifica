@@ -17,7 +17,6 @@ class MyWindow(QMainWindow):
     def adjustFixedSize(self):
         self.adjustSize()
         self.setFixedSize(self.width(), self.height())
-        print(self.width(), self.height())
 
     def makeMsg(self) -> QMessageBox:
         return QMessageBox(self)

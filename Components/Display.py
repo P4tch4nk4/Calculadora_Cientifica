@@ -23,11 +23,14 @@ class Display(QLineEdit):
 
     def keyPressEvent(self, event: QKeyEvent) -> None:
         key = event.key()
+        keyText = event.text()
 
         if key in (Qt.Key.Key_Enter, Qt.Key.Key_Return):
             self.equalRequested.emit()
         elif key in (Qt.Key.Key_Backspace, Qt.Key.Key_Delete):
             self.deleteRequested.emit()
             return event.ignore()
-        elif key == Qt.Key.Key_Escape:
+        elif key in (Qt.Key.Key_Escape, Qt.Key.Key_C):
             self.allDeleteRequested.emit()
+        elif keyText in '1234567890-+*.^/':
+            self.insert(keyText)
