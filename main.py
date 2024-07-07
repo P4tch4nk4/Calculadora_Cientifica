@@ -7,6 +7,7 @@ from styles import setupTheme
 from Components.Historic import Historic
 from Components.Display import Display
 from Components.Buttons import ButtonsGrid
+from functions import Functions
 
 
 
@@ -25,9 +26,12 @@ if __name__ == '__main__':
     window.addToWidgetVLayout(display)
     historic.updateHistoric()
 
+
     # ButtonsGrid
-    buttonsGrid = ButtonsGrid(display, historic, window)
+    buttonsGrid = ButtonsGrid(display)
     window.myLayout.addLayout(buttonsGrid)
+
+    functions = Functions(buttonsGrid, display, historic, window)
 
     # Icon
     window.setWindowIcon(icon)
