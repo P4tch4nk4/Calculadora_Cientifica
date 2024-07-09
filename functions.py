@@ -20,6 +20,7 @@ class Functions:
         display.allDeleteRequested.connect(self.allDelete)
         display.deleteRequested.connect(self.delete)
 
+        buttonsGrid.insertButtonTextRequested.connect(self.insertButtonText)
         buttonsGrid.equalRequested.connect(self.equal)
         buttonsGrid.allDeleteRequested.connect(self.allDelete)
         buttonsGrid.deleteRequested.connect(self.delete)
@@ -66,3 +67,7 @@ class Functions:
         msgBox.setWindowTitle('Error')
         msgBox.setIcon(msgBox.Icon.Warning)
         msgBox.exec()
+
+    def insertButtonText(self, button):
+        buttonText = button.text()
+        self.display.insert(buttonText)

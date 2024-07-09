@@ -31,6 +31,7 @@ if __name__ == '__main__':
     buttonsGrid = ButtonsGrid(display)
     window.myLayout.addLayout(buttonsGrid)
 
+    # all functions
     functions = Functions(buttonsGrid, display, historic, window)
 
     # Icon

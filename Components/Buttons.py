@@ -28,6 +28,7 @@ class ButtonsGrid(QGridLayout):
     equalRequested = Signal()
     deleteRequested = Signal()
     allDeleteRequested = Signal()
+    insertButtonTextRequested = Signal(Button)
 
     def __init__(self, display: 'Display',  parent: QWidget | None = None) -> None:
         super().__init__(parent)
@@ -36,9 +37,8 @@ class ButtonsGrid(QGridLayout):
             ['7', '8', '9', '*'],
             ['4', '5', '6', '-'],
             ['1', '2', '3', '+'],
-            ['', '0', '.', '='],
+            ['.', '0', '='],
         ]
-        self.display = display
         self._makeGrid()
 
     def _makeGrid(self):
@@ -50,8 +50,8 @@ class ButtonsGrid(QGridLayout):
                 if not isNumOrDot(button_text):
                     button.setProperty('cssClass', 'specialButton')
                     
-                if(button_text == '0'):
-                    self.addWidget(button, row, columns, 1, 1)
+                if(button_text == '='):
+                    self.addWidget(button, row, columns, 1, 2)
                 else:
                     self.addWidget(button, row, columns)
 
@@ -63,7 +63,7 @@ class ButtonsGrid(QGridLayout):
         @Slot()
         def realSlot():
             if button.text() in '0123456789*+-./^':
-                self._insertButtonTextToDisplay(button)
+                self.insertButtonTextRequested.emit(button)
 
             match button.text():
                 case '=':
@@ -74,7 +74,3 @@ class ButtonsGrid(QGridLayout):
                     self.deleteRequested.emit()
                 
         return realSlot
-
-    def _insertButtonTextToDisplay(self, button: Button):
-        buttonText = button.text()
-        self.display.insert(buttonText)
